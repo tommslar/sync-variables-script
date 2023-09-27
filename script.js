@@ -9,14 +9,14 @@ const figmaScssFile = '../_figma.scss';
 const gitRepoPath = '../figma variables sync';
 
 // Copiar el archivo SCSS a la carpeta del repositorio Git
-const destinationPath = path.join(gitRepoPath, '_figma.scss');
+const destinationPath = path.join(gitRepoPath, '/_figma.scss');
 fs.copyFileSync(figmaScssFile, destinationPath);
 
 // Inicializar un objeto Git
 const git = simpleGit(gitRepoPath);
 
 // Agregar el archivo copiado al seguimiento de Git
-git.add(['_figma.scss'], (err) => {
+git.add(['./_figma.scss'], (err) => {
   if (err) {
     console.error('Error al agregar el archivo a Git:', err);
   } else {
