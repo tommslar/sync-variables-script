@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 
 app.post('/clone', upload.single('file'), async (req, res) => {
   const repoUrl  = req.body.repoUrl;
+  const repoFilePath = req.body.repoFilePath
   const git = simpleGit();
 
   // Clonar repositorio
@@ -52,10 +53,9 @@ app.post('/clone', upload.single('file'), async (req, res) => {
   // Hacer cambios en el repositorio clonado (localPath)
 
   // Sub-Ruta al repositorio Git donde se debe reemplazar el archivo nuevo .scss
-   const gitRepoPath = './storage_repo/custom_scss';
-  
+  const destinationPath = "./storage_repo/" + repoFilePath;
+
   // Copiar el archivo SCSS a la carpeta del repositorio Git
-  const destinationPath = path.join(gitRepoPath, '/_figma.scss');
   fs.copyFileSync(req.file.path, destinationPath);
 
   // Commitear y pushear cambios del localPath al repoUrl

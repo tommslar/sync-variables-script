@@ -10,14 +10,44 @@
     <h1>Figma Variables Sync</h1>
     <form action="/clone" method="post" enctype="multipart/form-data">
 
-        <label for="repoUrl">Repositorio Externo:</label>
+        <label for="repoUrl">Repositorio Externo</label>
         <input type="text" placeholder="URL del repositorio GitHub" id="repoUrl" name="repoUrl" required><br><br>
 
-        <label for="file">Subir Archivo:</label>
-        <input type="file" id="file" name="file"><br><br>
+        <label for="repoFilePath">Ruta del archivo que queremos reemplazar</label>
+        <input type="text" placeholder="Path del archivo .scss" id="repoFilePath" name="repoFilePath" required>
+
+        <a id="openModalLink" class="help-text" href="#">¿Cómo encontrar la ruta del archivo?</a>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeModalBtn">&times;</span>
+                    <h2>¿Cómo encontrar la ruta del archivo?</h2>
+                    <br>
+                    <img src="/help.png" width="100%">
+                    <p>Debes entrar al repositorio donde tienes tu archivo, y hacer click en la estructura de carpetas hasta llegar a la ubicación del archivo, una vez que llegues, en la barra superior tendrás el ícono para copiar el path a ese archivo.</p>
+                </div>
+            </div>
         
+        <br><br>
+
+        <label for="file">Nuevo archivo de Variables</label>
+        <input type="file" id="file" name="file">
+
+        <a id="openModalLink2" class="help-text" href="#">¿Cómo exportar variables en .scss desde Figma?</a>
+            <div id="myModal2" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeModalBtn2">&times;</span>
+                    <h2>¿Cómo exportar variables en .scss desde Figma?</h2>
+                    <br>
+                    <img src="/help2.png" width="100%">
+                    <p>Dede Figma community puedes descargar el Plugin 'variables2css', y ejecutarlo en el archivo donde tienes las variables, donde podrás seleccionar el formato (.scss) y que colecciones de variables que quieres exportar.</p>
+                </div>
+            </div>
+
+        <br><br>
         <input type="submit" value="Sincronizar">
     </form>
+
+    <script src="/modalScript.js"></script>
 </body>
 
 </html>
