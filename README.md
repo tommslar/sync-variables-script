@@ -7,7 +7,7 @@ Actualmente, sólo funciona con repositorios públicos que no requieran autentic
 
 ## Instalación
 
-1. Tener instalado node.js.
+1. Tener instalado node.js y git.
 2. Clonar este repositorio
 3. Una vez dentro de la carpeta del proyecto, escribir en la terminal el comando: `npm install`.
 
