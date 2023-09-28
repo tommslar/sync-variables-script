@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clonar Repositorio</title>
+</head>
+<body>
+    <h1>Clonar Repositorio Externo</h1>
+    <form action="/clone" method="post" enctype="multipart/form-data">
+        <label for="repoUrl">URL del Repositorio Externo:</label>
+        <input type="text" id="repoUrl" name="repoUrl" required><br><br>
+
+        <label for="file">Subir Archivo:</label>
+        <input type="file" id="file" name="file"><br><br>
+        
+        <input type="submit" value="Sync">
+    </form>
+</body>
+</html>

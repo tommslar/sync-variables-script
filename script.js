@@ -4,13 +4,14 @@ const simpleGit = require('simple-git');
 
 // Ruta al archivo SCSS generado por Figma
 const figmaScssFile = '../_figma.scss';
+const figmaScssFile2 = './figma2.scss';
 
 // Ruta al repositorio Git
-const gitRepoPath = '../figma variables sync';
+const gitRepoPath = '../figma variables sync/custom_scss';
 
 // Copiar el archivo SCSS a la carpeta del repositorio Git
 const destinationPath = path.join(gitRepoPath, '/_figma.scss');
-fs.copyFileSync(figmaScssFile, destinationPath);
+fs.copyFileSync(figmaScssFile2, destinationPath);
 
 // Inicializar un objeto Git
 const git = simpleGit(gitRepoPath);
