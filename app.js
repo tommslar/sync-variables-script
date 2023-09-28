@@ -7,7 +7,6 @@ const multer = require('multer'); // Para gestionar la carga de archivos
 
 const app = express();
 const port = 3000;
-
 const localPath = './storage_repo';
 
 // Configura Multer para gestionar la carga de archivos
@@ -26,13 +25,8 @@ const storage = multer.diskStorage({
   }
 });
 
-
 const upload = multer({ storage });
 
-
-
-
-//app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
@@ -41,43 +35,30 @@ app.get('/', (req, res) => {
 
 app.post('/clone', upload.single('file'), async (req, res) => {
   const repoUrl  = req.body.repoUrl;
-  console.log("repourl");
-  console.log(repoUrl);
-
   const git = simpleGit();
 
-  // Verificar si el directorio local ya existe
+  // Clonar repositorio
   if (!fs.existsSync(localPath)) {
     try {
       await git.clone(repoUrl, localPath);
-      res.send('Repositorio externo clonado con éxito.');
+        console.log('Repositorio externo clonado con éxito.')
     } catch (err) {
       res.status(500).send('Error al clonar el repositorio externo: ' + err.message);
     }
   } else {
-    res.send('El repositorio externo ya está clonado en: ' + localPath);
+      console.log('El repositorio externo ya está clonado en: ' + localPath);
   }
 
-  // Función para hacer cambios en el repositorio clonado
+  // Hacer cambios en el repositorio clonado (localPath)
 
-  console.log("print req.file")
-  console.log(req.file);
-
-
+  // Sub-Ruta al repositorio Git donde se debe reemplazar el archivo nuevo .scss
+   const gitRepoPath = './storage_repo/custom_scss';
   
-      // Ruta al repositorio Git
-      const gitRepoPath = './storage_repo/custom_scss';
-  
-      // Copiar el archivo SCSS a la carpeta del repositorio Git
+  // Copiar el archivo SCSS a la carpeta del repositorio Git
+  const destinationPath = path.join(gitRepoPath, '/_figma.scss');
+  fs.copyFileSync(req.file.path, destinationPath);
 
-      const destinationPath = path.join(gitRepoPath, '/_figma.scss');
-      
-      console.log ("destination path");
-      console.log (destinationPath);
-
-      fs.copyFileSync(req.file.path, destinationPath);
-
-  
+  // Commitear y pushear cambios del localPath al repoUrl
   const git2 = simpleGit(localPath);
   try {
     // Agregar los cambios al área de preparación
@@ -94,8 +75,11 @@ app.post('/clone', upload.single('file'), async (req, res) => {
     console.error('Error al hacer commit y push de los cambios:', err);
   }
 
+  // Después de los procesos anteriores, envía el archivo HTML como respuesta
+  res.sendFile(__dirname + '/response.html');
 
 });
+
 
 app.listen(port, () => {
   console.log(`Aplicación escuchando en el puerto ${port}`);

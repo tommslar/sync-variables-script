@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clonar Repositorio</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-    <h1>Clonar Repositorio Externo</h1>
+    <h1>Figma Variables Sync</h1>
     <form action="/clone" method="post" enctype="multipart/form-data">
-        <label for="repoUrl">URL del Repositorio Externo:</label>
-        <input type="text" id="repoUrl" name="repoUrl" required><br><br>
+
+        <label for="repoUrl">Repositorio Externo:</label>
+        <input type="text" placeholder="URL del repositorio GitHub" id="repoUrl" name="repoUrl" required><br><br>
 
         <label for="file">Subir Archivo:</label>
         <input type="file" id="file" name="file"><br><br>
         
-        <input type="submit" value="Sync">
+        <input type="submit" value="Sincronizar">
     </form>
 </body>
+
 </html>
