@@ -47,7 +47,13 @@ app.post('/clone', upload.single('file'), async (req, res) => {
       res.status(500).send('Error al clonar el repositorio externo: ' + err.message);
     }
   } else {
-      console.log('El repositorio externo ya está clonado en: ' + localPath);
+    try {
+      // Actualizar el repositorio existente
+      await git.cwd(localPath).pull();
+      console.log('Repositorio externo actualizado con éxito.');
+    } catch (err) {
+      return res.status(500).send('Error al actualizar el repositorio externo: ' + err.message);
+    }
   }
 
   // Hacer cambios en el repositorio clonado (localPath)
